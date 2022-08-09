@@ -22,7 +22,8 @@
 #ifndef _WAYLAND_H
 #define _WAYLAND_H
 
-#ifdef PACKAGE_NAME /* only check HAVE_WAYLAND if config.h has been included */
+#ifdef PACKAGE_NAME /* only check HAVE_WAYLAND if config.h has been included \
+                     */
 #ifndef HAVE_WAYLAND
 #error file should only be included when HAVE_WAYLAND is enabled
 #endif
@@ -30,7 +31,7 @@
 
 #include <gtk/gtk.h>
 
-void wayland_init_notification (GtkWindow* nw);
-void wayland_move_notification (GtkWindow* nw, int x, int y);
+void wayland_init_notification(GtkWindow* nw);
+void wayland_move_notification(GtkWindow* nw, int x, int y);
 
 #endif /* _WAYLAND_H */

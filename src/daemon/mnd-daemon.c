@@ -32,74 +32,57 @@
 static gboolean debug = FALSE;
 static gboolean replace = FALSE;
 
-static GOptionEntry entries[] =
-{
-	{
-		"debug", 0, G_OPTION_FLAG_NONE,
-		G_OPTION_ARG_NONE, &debug,
-		"Enable debugging code",
-		NULL
-	},
-	{
-		"replace", 'r', G_OPTION_FLAG_NONE,
-		G_OPTION_ARG_NONE, &replace,
-		"Replace a currently running application",
-		NULL
-	},
-	{
-		NULL, 0, 0, G_OPTION_ARG_NONE, NULL, NULL, NULL
-	}
-};
+static GOptionEntry entries[] = {
+    {"debug", 0, G_OPTION_FLAG_NONE, G_OPTION_ARG_NONE, &debug,
+     "Enable debugging code", NULL},
+    {"replace", 'r', G_OPTION_FLAG_NONE, G_OPTION_ARG_NONE, &replace,
+     "Replace a currently running application", NULL},
+    {NULL, 0, 0, G_OPTION_ARG_NONE, NULL, NULL, NULL}};
 
-static gboolean parse_arguments (int    *argc, char ***argv)
-{
-	GOptionContext *context;
-	GError *error;
+static gboolean parse_arguments(int *argc, char ***argv) {
+  GOptionContext *context;
+  GError *error;
 
-	context = g_option_context_new (NULL);
+  context = g_option_context_new(NULL);
 
-	g_option_context_add_main_entries (context, entries, NULL);
+  g_option_context_add_main_entries(context, entries, NULL);
 
-	error = NULL;
-	if (g_option_context_parse (context, argc, argv, &error) == FALSE)
-	{
-		g_option_context_free (context);
-		g_warning ("Failed to parse command line arguments: %s", error->message);
-		g_error_free (error);
+  error = NULL;
+  if (g_option_context_parse(context, argc, argv, &error) == FALSE) {
+    g_option_context_free(context);
+    g_warning("Failed to parse command line arguments: %s", error->message);
+    g_error_free(error);
 
-		return FALSE;
-	}
+    return FALSE;
+  }
 
-	g_option_context_free (context);
+  g_option_context_free(context);
 
-	if (debug)
-		g_setenv ("G_MESSAGES_DEBUG", "all", FALSE);
+  if (debug) g_setenv("G_MESSAGES_DEBUG", "all", FALSE);
 
-	return TRUE;
+  return TRUE;
 }
 
-int main (int argc, char *argv[])
-{
-	NotifyDaemon *daemon;
+int main(int argc, char *argv[]) {
+  NotifyDaemon *daemon;
 
-	#if defined(HAVE_X11) && defined(HAVE_WAYLAND)
-		gdk_set_allowed_backends ("wayland,x11");
-	#elif defined(HAVE_WAYLAND)
-		gdk_set_allowed_backends ("wayland");
-	#else
-		gdk_set_allowed_backends ("x11");
-	#endif
+#if defined(HAVE_X11) && defined(HAVE_WAYLAND)
+  gdk_set_allowed_backends("wayland,x11");
+#elif defined(HAVE_WAYLAND)
+  gdk_set_allowed_backends("wayland");
+#else
+  gdk_set_allowed_backends("x11");
+#endif
 
-	gtk_init(&argc, &argv);
+  gtk_init(&argc, &argv);
 
-	if (!parse_arguments (&argc, &argv))
-		return EXIT_FAILURE;
+  if (!parse_arguments(&argc, &argv)) return EXIT_FAILURE;
 
-	daemon = notify_daemon_new (replace);
+  daemon = notify_daemon_new(replace);
 
-	gtk_main();
+  gtk_main();
 
-	g_object_unref (daemon);
+  g_object_unref(daemon);
 
-	return EXIT_SUCCESS;
+  return EXIT_SUCCESS;
 }

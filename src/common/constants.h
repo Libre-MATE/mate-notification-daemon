@@ -21,14 +21,14 @@
 #ifndef _CONSTANTS_H_
 #define _CONSTANTS_H_
 
-#define GSETTINGS_SCHEMA                 "org.mate.NotificationDaemon"
-#define GSETTINGS_KEY_THEME              "theme"
-#define GSETTINGS_KEY_DO_NOT_DISTURB     "do-not-disturb"
-#define GSETTINGS_KEY_MONITOR_NUMBER     "monitor-number"
-#define GSETTINGS_KEY_POPUP_LOCATION     "popup-location"
-#define GSETTINGS_KEY_SOUND_ENABLED      "sound-enabled"
+#define GSETTINGS_SCHEMA "org.mate.NotificationDaemon"
+#define GSETTINGS_KEY_THEME "theme"
+#define GSETTINGS_KEY_DO_NOT_DISTURB "do-not-disturb"
+#define GSETTINGS_KEY_MONITOR_NUMBER "monitor-number"
+#define GSETTINGS_KEY_POPUP_LOCATION "popup-location"
+#define GSETTINGS_KEY_SOUND_ENABLED "sound-enabled"
 #define GSETTINGS_KEY_USE_ACTIVE_MONITOR "use-active-monitor"
-#define NOTIFICATION_BUS_NAME            "org.freedesktop.Notifications"
-#define NOTIFICATION_BUS_PATH            "/org/freedesktop/Notifications"
+#define NOTIFICATION_BUS_NAME "org.freedesktop.Notifications"
+#define NOTIFICATION_BUS_PATH "/org/freedesktop/Notifications"
 
 #endif /* _CONSTANTS_H_ */

@@ -25,33 +25,29 @@
 #ifndef NOTIFY_DAEMON_H
 #define NOTIFY_DAEMON_H
 
-#include <glib.h>
-#include <glib-object.h>
 #include <gio/gio.h>
+#include <glib-object.h>
+#include <glib.h>
 
 #include "constants.h"
 
 #define NOTIFY_TYPE_DAEMON (notify_daemon_get_type())
-G_DECLARE_FINAL_TYPE (NotifyDaemon, notify_daemon, NOTIFY, DAEMON, GObject)
+G_DECLARE_FINAL_TYPE(NotifyDaemon, notify_daemon, NOTIFY, DAEMON, GObject)
 
 #define NOTIFY_DAEMON_DEFAULT_TIMEOUT 7000
 
-enum {
-	URGENCY_LOW,
-	URGENCY_NORMAL,
-	URGENCY_CRITICAL
-};
+enum { URGENCY_LOW, URGENCY_NORMAL, URGENCY_CRITICAL };
 
 typedef enum {
-	NOTIFYD_CLOSED_EXPIRED = 1,
-	NOTIFYD_CLOSED_USER = 2,
-	NOTIFYD_CLOSED_API = 3,
-	NOTIFYD_CLOSED_RESERVED = 4
+  NOTIFYD_CLOSED_EXPIRED = 1,
+  NOTIFYD_CLOSED_USER = 2,
+  NOTIFYD_CLOSED_API = 3,
+  NOTIFYD_CLOSED_RESERVED = 4
 } NotifydClosedReason;
 
 G_BEGIN_DECLS
 
-NotifyDaemon*     notify_daemon_new        (gboolean replace);
+NotifyDaemon* notify_daemon_new(gboolean replace);
 
 GQuark notify_daemon_error_quark(void);
 
