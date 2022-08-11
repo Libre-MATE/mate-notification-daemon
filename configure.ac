@@ -97,6 +97,15 @@ if test -z "$GLIB_COMPILE_RESOURCES"; then
 fi
 
 dnl ---------------------------------------------------------------------------
+dnl GDBUS_CODEGEN
+dnl ---------------------------------------------------------------------------
+AC_ARG_VAR([GDBUS_CODEGEN],[gdbus-codegen bin])
+AC_PATH_PROG([GDBUS_CODEGEN],[gdbus-codegen],[])
+if test -z "$GDBUS_CODEGEN"; then
+  AC_MSG_ERROR([gdbus-codegen not found])
+fi
+
+dnl ---------------------------------------------------------------------------
 dnl XMLLINT
 dnl ---------------------------------------------------------------------------
 AC_ARG_VAR([XMLLINT],[xmllint bin])
