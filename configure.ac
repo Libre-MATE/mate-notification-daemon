@@ -6,6 +6,8 @@ dnl ################################################################
 AC_INIT([mate-notification-daemon], [1.26.0], [https://mate-desktop.org])
 AC_PREREQ(2.63)
 
+m4_define(glib_minver, 2.50.0)
+
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_SRCDIR([config.h.in])
 AC_CONFIG_MACRO_DIR([m4])
@@ -70,6 +72,7 @@ dnl ---------------------------------------------------------------------------
 LT_PREREQ([2.2.6])
 LT_INIT
 
+AC_SUBST(GLIB_REQUIRED, [glib_minver])
 
 dnl ---------------------------------------------------------------------------
 dnl i18n stuff
@@ -119,13 +122,12 @@ AC_SUBST(THEME_LIBS)
 dnl ---------------------------------------------------------------------------
 dnl Requirements for the daemon
 dnl ---------------------------------------------------------------------------
-REQ_GLIB_VERSION=2.50.0
 REQ_LIBCANBERRA_GTK_VERSION=0.4
 PKG_CHECK_MODULES(GMODULE,gmodule-2.0,[GMODULE_ADD="gmodule-2.0"],[GMODULE_ADD=""])
 pkg_modules="
 	gtk+-3.0 >= $GTK_REQUIRED, \
-	glib-2.0 >= $REQ_GLIB_VERSION, \
-	gio-2.0 >= $REQ_GLIB_VERSION, \
+	glib-2.0 >= $GLIB_REQUIRED, \
+	gio-2.0 >= $GLIB_REQUIRED, \
         $GMODULE_ADD \
         libcanberra-gtk3 >= $REQ_LIBCANBERRA_GTK_VERSION \
 "
@@ -136,7 +138,7 @@ dnl Requirements for panel applet
 dnl ---------------------------------------------------------------------------
 LIBPANEL4_REQUIRED=1.17.0
 LIBMATE_DESKTOP_REQUIRED=1.17.0
-PKG_CHECK_MODULES(NOTIFICATION_APPLET, mate-desktop-2.0 >= $LIBMATE_DESKTOP_REQUIRED libmatepanelapplet-4.0 >= $LIBPANEL4_REQUIRED gtk+-3.0 >= $GTK_REQUIRED glib-2.0 >= $REQ_GLIB_VERSION)
+PKG_CHECK_MODULES(NOTIFICATION_APPLET, mate-desktop-2.0 >= $LIBMATE_DESKTOP_REQUIRED libmatepanelapplet-4.0 >= $LIBPANEL4_REQUIRED gtk+-3.0 >= $GTK_REQUIRED glib-2.0 >= $GLIB_REQUIRED)
 AC_SUBST(NOTIFICATION_APPLET_CFLAGS)
 AC_SUBST(NOTIFICATION_APPLET_LIBS)
 
@@ -204,7 +206,7 @@ AC_SUBST(NOTIFICATION_DAEMON_LIBS)
 dnl ---------------------------------------------------------------------------
 dnl Requirements for the setup tool
 dnl ---------------------------------------------------------------------------
-PKG_CHECK_MODULES(NOTIFICATION_CAPPLET, glib-2.0 >= $REQ_GLIB_VERSION gio-2.0 >= $REQ_GLIB_VERSION gtk+-3.0 >= $GTK_REQUIRED libnotify)
+PKG_CHECK_MODULES(NOTIFICATION_CAPPLET, glib-2.0 >= $GLIB_REQUIRED gio-2.0 >= $GLIB_REQUIRED gtk+-3.0 >= $GTK_REQUIRED libnotify)
 AC_SUBST(NOTIFICATION_CAPPLET_CFLAGS)
 AC_SUBST(NOTIFICATION_CAPPLET_LIBS)
 

@@ -30,6 +30,7 @@ mate_notification_daemon_built_sources =	\
 
 $(mate_notification_daemon_built_sources) : Makefile.am $(srcdir)/notificationdaemon.xml
 	$(AM_V_GEN) gdbus-codegen \
+		--glib-min-required $(GLIB_REQUIRED) \
 		--interface-prefix org.freedesktop. \
 		--c-namespace NotifyDaemon \
 		--generate-c-code mnd-dbus-generated \
