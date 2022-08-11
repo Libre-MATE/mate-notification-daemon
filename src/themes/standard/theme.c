@@ -20,11 +20,14 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301, USA.
  */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <libxml/xpath.h>
-
-#include "config.h"
 
 typedef void (*ActionInvokedCb)(GtkWindow* nw, const char* key);
 typedef void (*UrlClickedCb)(GtkWindow* nw, const char* url);
@@ -338,16 +341,6 @@ static void create_border_with_arrow(GtkWidget* nw, WindowData* windata) {
         }
       }
 
-/*
- * Why risk this for official builds? If it's somehow off the
- * screen, it won't horribly impact the user. Definitely less
- * than an assertion would...
- */
-#if 0
-				g_assert(arrow_offset + arrow_side1_width >= 0);
-				g_assert(arrow_offset + arrow_side1_width + arrow_side2_width <= width);
-#endif
-
       windata->border_points = g_new0(GdkPoint, windata->num_border_points);
       shape_points = g_new0(GdkPoint, windata->num_border_points);
 
@@ -416,11 +409,6 @@ static void create_border_with_arrow(GtkWidget* nw, WindowData* windata) {
 
         y = windata->point_y - height;
       }
-
-#if 0
-				g_assert(i == windata->num_border_points);
-				g_assert(windata->point_x - arrow_offset - arrow_side1_width >= 0);
-#endif
 
       gtk_window_move(GTK_WINDOW(windata->win),
                       windata->point_x - arrow_offset - arrow_side1_width, y);
