@@ -22,6 +22,10 @@
  * 02110-1301, USA.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <errno.h>
 #include <glib-object.h>
 #include <glib.h>
@@ -30,8 +34,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include "config.h"
 
 #ifdef HAVE_X11
 #include <X11/Xatom.h>

@@ -23,11 +23,13 @@
  * Boston, MA  02110-1301  USA
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <libxml/xpath.h>
-
-#include "config.h"
 
 /* Define basic coco types */
 typedef void (*ActionInvokedCb)(GtkWindow *nw, const char *key);

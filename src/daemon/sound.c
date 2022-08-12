@@ -20,12 +20,14 @@
  * 02110-1301, USA.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "sound.h"
 
 #include <canberra-gtk.h>
 #include <glib/gi18n.h>
-
-#include "config.h"
 
 void sound_play_file(GtkWidget *widget, const char *filename) {
   ca_gtk_play_for_widget(widget, 0, CA_PROP_MEDIA_ROLE, "event",

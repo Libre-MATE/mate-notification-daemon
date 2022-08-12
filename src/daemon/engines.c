@@ -22,9 +22,12 @@
  * 02110-1301, USA.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "engines.h"
 
-#include "config.h"
 #include "daemon.h"
 
 #ifdef HAVE_WAYLAND

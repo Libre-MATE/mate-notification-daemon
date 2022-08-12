@@ -20,6 +20,10 @@
  * 02110-1301, USA.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <gdk/gdk.h>
 #include <gio/gio.h>
 #include <glib.h>
@@ -29,7 +33,6 @@
 #include <libnotify/notify.h>
 #include <string.h>
 
-#include "config.h"
 #include "constants.h"
 #include "stack.h"
 
