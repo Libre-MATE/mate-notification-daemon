@@ -369,7 +369,7 @@ GtkWindow* create_notification(UrlClickedCb url_clicked) {
 
   gtk_button_set_relief(GTK_BUTTON(close_button), GTK_RELIEF_NONE);
   gtk_container_set_border_width(GTK_CONTAINER(close_button), 0);
-  g_signal_connect_swapped(G_OBJECT(close_button), "clicked",
+  g_signal_connect_swapped(close_button, "clicked",
                            G_CALLBACK(gtk_widget_destroy), win);
 
   atkobj = gtk_widget_get_accessible(close_button);
@@ -412,7 +412,7 @@ GtkWindow* create_notification(UrlClickedCb url_clicked) {
   gtk_label_set_line_wrap_mode(GTK_LABEL(windata->body_label),
                                PANGO_WRAP_WORD_CHAR);
   gtk_label_set_max_width_chars(GTK_LABEL(windata->body_label), 50);
-  g_signal_connect_swapped(G_OBJECT(windata->body_label), "activate-link",
+  g_signal_connect_swapped(windata->body_label, "activate-link",
                            G_CALLBACK(windata->url_clicked), win);
 
   atkobj = gtk_widget_get_accessible(windata->body_label);

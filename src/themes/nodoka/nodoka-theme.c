@@ -719,7 +719,7 @@ GtkWindow *create_notification(UrlClickedCb url_clicked) {
   gtk_button_set_relief(GTK_BUTTON(close_button), GTK_RELIEF_NONE);
   gtk_container_set_border_width(GTK_CONTAINER(close_button), 0);
   gtk_widget_set_size_request(close_button, 24, 24);
-  g_signal_connect_swapped(G_OBJECT(close_button), "clicked",
+  g_signal_connect_swapped(close_button, "clicked",
                            G_CALLBACK(gtk_widget_destroy), win);
 
   atkobj = gtk_widget_get_accessible(close_button);

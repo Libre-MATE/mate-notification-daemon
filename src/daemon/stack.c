@@ -338,7 +338,7 @@ void notify_stack_add_window(NotifyStack *stack, GtkWindow *nw,
   theme_move_notification(nw, x, y);
 
   if (new_notification) {
-    g_signal_connect_swapped(G_OBJECT(nw), "destroy",
+    g_signal_connect_swapped(nw, "destroy",
                              G_CALLBACK(notify_stack_remove_window), stack);
     stack->windows = g_list_prepend(stack->windows, nw);
   }
