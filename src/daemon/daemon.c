@@ -1291,13 +1291,13 @@ static gboolean notify_daemon_notify_handler(
     gtk_widget_realize(GTK_WIDGET(nw));
     new_notification = TRUE;
 
-    g_signal_connect(G_OBJECT(nw), "button-release-event",
+    g_signal_connect(nw, "button-release-event",
                      G_CALLBACK(window_clicked_cb), daemon);
-    g_signal_connect(G_OBJECT(nw), "destroy",
+    g_signal_connect(nw, "destroy",
                      G_CALLBACK(_notification_destroyed_cb), daemon);
-    g_signal_connect(G_OBJECT(nw), "enter-notify-event",
+    g_signal_connect(nw, "enter-notify-event",
                      G_CALLBACK(_mouse_entered_cb), daemon);
-    g_signal_connect(G_OBJECT(nw), "leave-notify-event",
+    g_signal_connect(nw, "leave-notify-event",
                      G_CALLBACK(_mouse_exitted_cb), daemon);
   } else {
     theme_clear_notification_actions(nw);

@@ -191,11 +191,11 @@ static MateNotificationApplet *applet_main(MatePanelApplet *applet_widget) {
                   do_not_disturb_toggle_action, "active",
                   G_SETTINGS_BIND_DEFAULT);
 
-  g_signal_connect(G_OBJECT(applet->applet), "destroy",
+  g_signal_connect(applet->applet, "destroy",
                    G_CALLBACK(applet_destroy), applet);
 
   /* GSettings callback */
-  g_signal_connect(G_OBJECT(applet->settings),
+  g_signal_connect(applet->settings,
                    "changed::" GSETTINGS_KEY_DO_NOT_DISTURB,
                    G_CALLBACK(settings_changed), applet);
 
@@ -210,7 +210,7 @@ static gboolean applet_factory(MatePanelApplet *applet_widget, const gchar *iid,
   if (!strcmp(iid, "MateNotificationApplet")) {
     applet = applet_main(applet_widget);
 
-    g_signal_connect(G_OBJECT(applet_widget), "change_size",
+    g_signal_connect(applet_widget, "change_size",
                      G_CALLBACK(applet_draw_icon), (gpointer)applet);
 
     return TRUE;

@@ -620,7 +620,7 @@ GtkWindow* create_notification(UrlClickedCb url_clicked) {
                          (GDestroyNotify)destroy_windata);
   atk_object_set_role(gtk_widget_get_accessible(win), ATK_ROLE_ALERT);
 
-  g_signal_connect(G_OBJECT(win), "configure_event",
+  g_signal_connect(win, "configure_event",
                    G_CALLBACK(configure_event_cb), windata);
 
   main_vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -628,7 +628,7 @@ GtkWindow* create_notification(UrlClickedCb url_clicked) {
   gtk_container_add(GTK_CONTAINER(win), main_vbox);
   gtk_container_set_border_width(GTK_CONTAINER(main_vbox), 1);
 
-  g_signal_connect(G_OBJECT(main_vbox), "draw", G_CALLBACK(on_draw), windata);
+  g_signal_connect(main_vbox, "draw", G_CALLBACK(on_draw), windata);
 
   windata->top_spacer = gtk_image_new();
   gtk_box_pack_start(GTK_BOX(main_vbox), windata->top_spacer, FALSE, FALSE, 0);
@@ -719,7 +719,7 @@ GtkWindow* create_notification(UrlClickedCb url_clicked) {
   gtk_label_set_line_wrap_mode(GTK_LABEL(windata->body_label),
                                PANGO_WRAP_WORD_CHAR);
   gtk_label_set_max_width_chars(GTK_LABEL(windata->body_label), 50);
-  g_signal_connect(G_OBJECT(windata->body_label), "activate-link",
+  g_signal_connect(windata->body_label, "activate-link",
                    G_CALLBACK(activate_link), windata);
 
   atkobj = gtk_widget_get_accessible(windata->body_label);
@@ -995,7 +995,7 @@ void add_notification_action(GtkWindow* nw, const char* text, const char* key,
                        FALSE, TRUE, 0);
       gtk_widget_set_size_request(windata->pie_countdown, PIE_WIDTH,
                                   PIE_HEIGHT);
-      g_signal_connect(G_OBJECT(windata->pie_countdown), "draw",
+      g_signal_connect(windata->pie_countdown, "draw",
                        G_CALLBACK(on_countdown_draw), windata);
     }
   }
@@ -1042,7 +1042,7 @@ add_button:
   g_object_set_data(G_OBJECT(button), "_nw", nw);
   g_object_set_data_full(G_OBJECT(button), "_action_key", g_strdup(key),
                          g_free);
-  g_signal_connect(G_OBJECT(button), "button-release-event",
+  g_signal_connect(button, "button-release-event",
                    G_CALLBACK(action_clicked_cb), cb);
 
   gtk_widget_show_all(windata->actions_box);

@@ -301,11 +301,9 @@ GtkWindow* create_notification(UrlClickedCb url_clicked) {
   win = gtk_window_new(GTK_WINDOW_POPUP);
   gtk_window_set_resizable(GTK_WINDOW(win), FALSE);
   gtk_widget_set_app_paintable(win, TRUE);
-  g_signal_connect(G_OBJECT(win), "map-event", G_CALLBACK(on_window_map),
-                   windata);
-  g_signal_connect(G_OBJECT(win), "draw", G_CALLBACK(on_draw), windata);
-  g_signal_connect(G_OBJECT(win), "realize", G_CALLBACK(on_window_realize),
-                   windata);
+  g_signal_connect(win, "map-event", G_CALLBACK(on_window_map), windata);
+  g_signal_connect(win, "draw", G_CALLBACK(on_draw), windata);
+  g_signal_connect(win, "realize", G_CALLBACK(on_window_realize), windata);
 
   windata->win = win;
 
@@ -333,7 +331,7 @@ GtkWindow* create_notification(UrlClickedCb url_clicked) {
                          (GDestroyNotify)destroy_windata);
   atk_object_set_role(gtk_widget_get_accessible(win), ATK_ROLE_ALERT);
 
-  g_signal_connect(G_OBJECT(win), "configure-event",
+  g_signal_connect(win, "configure-event",
                    G_CALLBACK(on_configure_event), windata);
 
   main_vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -726,7 +724,7 @@ void add_notification_action(GtkWindow* nw, const char* text, const char* key,
                        FALSE, TRUE, 0);
       gtk_widget_set_size_request(windata->pie_countdown, PIE_WIDTH,
                                   PIE_HEIGHT);
-      g_signal_connect(G_OBJECT(windata->pie_countdown), "draw",
+      g_signal_connect(windata->pie_countdown, "draw",
                        G_CALLBACK(on_countdown_draw), windata);
     }
   }
@@ -776,7 +774,7 @@ add_button:
   g_object_set_data(G_OBJECT(button), "_nw", nw);
   g_object_set_data_full(G_OBJECT(button), "_action_key", g_strdup(key),
                          g_free);
-  g_signal_connect(G_OBJECT(button), "button-release-event",
+  g_signal_connect(button, "button-release-event",
                    G_CALLBACK(on_action_clicked), cb);
 
   gtk_widget_show_all(windata->actions_box);
