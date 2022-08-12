@@ -3,7 +3,9 @@ dnl Process this file with autoconf to create configure.
 dnl ################################################################
 dnl # Initialize autoconf
 dnl ################################################################
-AC_INIT([mate-notification-daemon], [1.26.0], [https://mate-desktop.org])
+AC_INIT([mate-notification-daemon],
+        [1.26.0],
+        [https://github.com/Libre-MATE/mate-notification-daemon])
 AC_PREREQ(2.63)
 
 m4_define(glib_minver, 2.50.0)

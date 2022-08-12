@@ -87,7 +87,8 @@ static void show_about(GtkAction *action, MateNotificationApplet *applet) {
 
   gtk_show_about_dialog(
       NULL, "title", _("About Do Not Disturb"), "version", VERSION, "copyright",
-      _("Copyright \xc2\xa9 2021 MATE developers"), "comments",
+      _("Copyright \xc2\xa9 2021 MATE developers\n"
+        "Copyright \xc2\xa9 2022 Libre MATE"), "comments",
       _("Activate the do not disturb mode quickly."), "authors", authors,
       "translator-credits", _("translator-credits"), "logo_icon_name",
       "mate-notification-properties", NULL);
