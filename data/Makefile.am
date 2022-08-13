@@ -33,9 +33,9 @@ desktop_in_files = $(desktop_DATA:.desktop=.desktop.in)
 
 $(desktop_DATA): $(desktop_in_files)
 if USE_NLS
-	$(AM_V_GEN) $(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
+	$(AM_V_GEN)$(MSGFMT) --desktop --template $< -d $(top_srcdir)/po -o $@
 else
-	$(AM_V_GEN) sed '/^# Translators/d' < $< > $@
+	$(AM_V_GEN)$(SED) '/^# Translators/d' < $< > $@
 endif
 
 gsettings_SCHEMAS = org.mate.NotificationDaemon.gschema.xml
