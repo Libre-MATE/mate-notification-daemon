@@ -7,6 +7,7 @@ AC_INIT([mate-notification-daemon],
         [1.26.0],
         [https://github.com/Libre-MATE/mate-notification-daemon])
 AC_PREREQ(2.63)
+AC_COPYRIGHT([Copyright (C) 2022 Libre MATE])
 
 m4_define(glib_minver, 2.50.0)
 
