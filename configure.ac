@@ -58,7 +58,8 @@ AC_DEFINE_UNQUOTED(NOTIFICATION_DAEMON_VERSION, "$NOTIFICATION_DAEMON_VERSION",
 dnl ################################################################
 dnl # Initialize automake
 dnl ################################################################
-AM_INIT_AUTOMAKE([1.11 no-dist-gzip dist-xz foreign silent-rules check-news])
+AM_INIT_AUTOMAKE([1.11 no-dist-gzip dist-xz foreign check-news])
+AM_SILENT_RULES([yes])
 AM_MAINTAINER_MODE
 
 dnl ################################################################
