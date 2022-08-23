@@ -353,7 +353,8 @@ static void on_screen_monitors_changed(GdkScreen* screen,
 static void create_stacks_for_screen(NotifyDaemon* daemon, GdkScreen* screen) {
   GdkDisplay* display;
   NotifyScreen* nscreen;
-  int i, n_monitors;
+  int n_monitors;
+  gsize i;
 
   nscreen = daemon->screen;
   display = gdk_screen_get_display(screen);
@@ -365,7 +366,7 @@ static void create_stacks_for_screen(NotifyDaemon* daemon, GdkScreen* screen) {
 
   for (i = 0; i < nscreen->n_stacks; i++) {
     create_stack_for_monitor(daemon, screen,
-                             gdk_display_get_monitor(display, i));
+                             gdk_display_get_monitor(display, (int)i));
   }
 }
 
@@ -376,7 +377,7 @@ static GdkFilterReturn screen_xevent_filter(GdkXEvent* xevent, GdkEvent* event,
 
   if (xev->type == PropertyNotify &&
       xev->xproperty.atom == nscreen->workarea_atom) {
-    int i;
+    gsize i;
 
     for (i = 0; i < nscreen->n_stacks; i++) {
       notify_stack_queue_update_position(nscreen->stacks[i]);
@@ -422,7 +423,7 @@ static void on_popup_location_changed(GSettings* settings, gchar* key,
                                       NotifyDaemon* daemon) {
   NotifyStackLocation stack_location;
   gchar* slocation;
-  int i;
+  gsize i;
 
   slocation = g_settings_get_string(daemon->gsettings, key);
 
@@ -481,7 +482,7 @@ static void notify_daemon_init(NotifyDaemon* daemon) {
 static void destroy_screen(NotifyDaemon* daemon) {
   GdkDisplay* display;
   GdkScreen* screen;
-  gint i;
+  gsize i;
 
   display = gdk_display_get_default();
   screen = gdk_display_get_default_screen(display);
@@ -1444,7 +1445,7 @@ static gboolean notify_daemon_notify_handler(
                                GSETTINGS_KEY_MONITOR_NUMBER));
       }
 
-      if (_gtk_get_monitor_num(monitor_id) >= daemon->screen->n_stacks) {
+      if (_gtk_get_monitor_num(monitor_id) >= (int)daemon->screen->n_stacks) {
         /* screw it - dump it on the last one we'll get
          a monitors-changed signal soon enough*/
         monitor_id = gdk_display_get_monitor(gdk_display_get_default(),
