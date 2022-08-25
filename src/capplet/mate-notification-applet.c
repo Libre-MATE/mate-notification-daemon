@@ -205,11 +205,10 @@ static MateNotificationApplet *applet_main(MatePanelApplet *applet_widget) {
 
 static gboolean applet_factory(MatePanelApplet *applet_widget, const gchar *iid,
                                gpointer data) {
-  MateNotificationApplet *applet;
   (void)data;
 
   if (!strcmp(iid, "MateNotificationApplet")) {
-    applet = applet_main(applet_widget);
+    MateNotificationApplet *applet = applet_main(applet_widget);
 
     g_signal_connect(applet_widget, "change_size",
                      G_CALLBACK(applet_draw_icon), (gpointer)applet);

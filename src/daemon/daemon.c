@@ -1416,9 +1416,6 @@ static gboolean notify_daemon_notify_handler(
       theme_move_notification(nw, x, y);
     } else {
       GdkMonitor* monitor_id;
-      GdkDisplay* display;
-      GdkSeat* seat;
-      GdkDevice* pointer;
       GdkScreen* screen;
 
       theme_set_notification_arrow(nw, FALSE, 0, 0);
@@ -1429,10 +1426,9 @@ static gboolean notify_daemon_notify_handler(
       if (g_settings_get_boolean(daemon->gsettings,
                                  GSETTINGS_KEY_USE_ACTIVE_MONITOR)) {
         gint coordinate_x, coordinate_y;
-
-        display = gdk_display_get_default();
-        seat = gdk_display_get_default_seat(display);
-        pointer = gdk_seat_get_pointer(seat);
+        GdkDisplay* display = gdk_display_get_default();
+        GdkSeat* seat = gdk_display_get_default_seat(display);
+        GdkDevice* pointer = gdk_seat_get_pointer(seat);
 
         gdk_device_get_position(pointer, &screen, &coordinate_x, &coordinate_y);
         monitor_id = gdk_display_get_monitor_at_point(

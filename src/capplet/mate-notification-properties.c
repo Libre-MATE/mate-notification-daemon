@@ -304,14 +304,11 @@ static gchar* get_theme_name(const gchar* filename) {
 }
 
 static void notification_properties_dialog_setup_themes(
-    NotificationAppletDialog* dialog) {
-  GDir* dir;
-  const gchar* filename;
-  char* theme;
-  char* theme_name;
-  char* theme_label;
+    NotificationAppletDialog *dialog) {
+  GDir *dir;
+  char *theme;
   gboolean valid;
-  GtkListStore* store;
+  GtkListStore *store;
   GtkTreeIter iter;
 
   store = gtk_list_store_new(N_COLUMNS_THEME, G_TYPE_STRING, G_TYPE_STRING,
@@ -326,9 +323,12 @@ static void notification_properties_dialog_setup_themes(
                    G_CALLBACK(notification_properties_theme_changed), dialog);
 
   if ((dir = g_dir_open(ENGINES_DIR, 0, NULL))) {
+    const gchar *filename;
+
     while ((filename = g_dir_read_name(dir))) {
       if (g_str_has_suffix(filename, "." G_MODULE_SUFFIX)) {
-        theme_name = get_theme_name(filename);
+        char *theme_name = get_theme_name(filename);
+        char *theme_label;
 
         /* FIXME: other solution than hardcode? */
         if (g_str_equal(theme_name, "coco")) {
